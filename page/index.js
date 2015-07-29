@@ -24,7 +24,7 @@ module.exports = yeoman.generators.Base.extend({
 
   initializing: function () {
     this.argument('pageName', {
-      required: true,
+      required: false,
       type: String,
       desc: 'page name'
     });
@@ -41,15 +41,35 @@ module.exports = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
     var prompts = [];
-    if (fs.existsSync(this.pageName)) {
+    if (!this.pageName) {
+      prompts.push({
+        type: 'input',
+        name: 'pageName',
+        message: '请告诉我页面名字吧~',
+        store: false,
+        validate: function(input) {
+          if (!input) {
+            return '不能为空哦，会让人家很为难的~';
+          }
+          if (fs.existsSync(this.destinationPath('page/' + input))) {
+            return '页面已经存在当前目录中了，换个名字吧~';
+          }
+          return true;
+        }.bind(this)
+      });
+    }
+    if (fs.existsSync(this.destinationPath('page/' + this.pageName))) {
       prompts.push({
         type: 'input',
         name: 'pageName',
         message: '页面已经存在当前目录中了，换个名字吧~',
-        store: true,
+        store: false,
         validate: function(input) {
           if (!input) {
             return '不能为空哦，会让人家很为难的~';
+          }
+          if (fs.existsSync(this.destinationPath('page/' + input))) {
+            return '页面已经存在当前目录中了，换个名字吧~';
           }
           return true;
         }.bind(this)
@@ -77,6 +97,7 @@ module.exports = yeoman.generators.Base.extend({
       this.pageConf.modName = _.decapitalize(this.pageConf.modClassName);
       this.pageConf.pageName = this.pageConf.pageName || this.pageName;
       this.pageConf.appName = this.moduleConf.app;
+      this.pageConf.commonModule = this.moduleConf.common;
       if (this.pageConf.isTencent) {
         this.pageConf.secondaryDomain = 'static';
       } else {

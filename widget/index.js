@@ -13,7 +13,7 @@ module.exports = yeoman.generators.Base.extend({
 
   initializing: function () {
     this.argument('widgetName', {
-      required: true,
+      required: false,
       type: String,
       desc: 'widget name'
     });
@@ -30,12 +30,29 @@ module.exports = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
     var prompts = [];
+    if (!this.widgetName) {
+      prompts.push({
+        type: 'input',
+        name: 'widgetName',
+        message: '请告诉我widget名字吧~',
+        store: false,
+        validate: function(input) {
+          if (!input) {
+            return '不能为空哦，会让人家很为难的~';
+          }
+          if (fs.existsSync(this.destinationPath('widget/' + input))) {
+            return '页面已经存在当前目录中了，换个名字吧~';
+          }
+          return true;
+        }.bind(this)
+      });
+    }
     if (fs.existsSync(this.destinationPath('widget/' + this.widgetName))) {
       prompts.push({
         type: 'input',
         name: 'widgetName',
         message: '页面已经存在当前目录中了，换个名字吧~',
-        store: true,
+        store: false,
         validate: function(input) {
           if (!input) {
             return '不能为空哦，会让人家很为难的~';
