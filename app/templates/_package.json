@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "athena-mate": "^0.0.1"
+    "athena-mate": "^0.0.2",
+    "gulp-flatten": "^0.1.1"
   },
   "devDependencies": {
     "gulp": "^3.9.0"

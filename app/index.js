@@ -16,7 +16,7 @@ module.exports = yeoman.generators.Base.extend({
   },
   initializing: function () {
     this.log(yosay(
-      chalk.cyan('Athena')
+      chalk.cyan('拍拍无线页面构建脚手架')
     ));
     this.log('need help? go and open issue: https://github.com/luckyadam/generator-athena/issues/new');
     this.conf = {};
@@ -69,7 +69,12 @@ module.exports = yeoman.generators.Base.extend({
       this.conf.date = ((new Date()).getFullYear()) + '-' + ((new Date()).getMonth() + 1) + '-' + ((new Date()).getDate());
       this.conf.moduleClassName = this._.classify(this.conf.moduleName);
       this.conf.moduleName = _.decapitalize(this.conf.moduleClassName);
-      this.conf.folderPath = this.destinationRoot() + '/';
+      var pwd = this.destinationPath();
+      if (pwd.indexOf('/') >= 0) {
+        this.conf.folderPath = pwd + '/';
+      } else {
+        this.conf.folderPath = pwd + '\\';
+      }
 
       done();
     }.bind(this));
@@ -81,6 +86,9 @@ module.exports = yeoman.generators.Base.extend({
       this.mkdir(conf.moduleName);
       this.mkdir(conf.moduleName + '/page');
       this.mkdir(conf.moduleName + '/static');
+      this.mkdir(conf.moduleName + '/static/css');
+      this.mkdir(conf.moduleName + '/static/image');
+      this.mkdir(conf.moduleName + '/static/js');
       this.mkdir(conf.moduleName + '/widget');
 
       this.log(this.conf);
@@ -95,7 +103,6 @@ module.exports = yeoman.generators.Base.extend({
       return;
     }
     process.chdir(this.conf.moduleName);
-    console.log(this.npmInstall);
     this.npmInstall();
     this.on('end', function () {
       var talkText = 'yo yo 文件已经生成好啦~~\n';
