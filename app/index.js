@@ -87,7 +87,7 @@ module.exports = yeoman.generators.Base.extend({
       this.mkdir(conf.moduleName + '/page');
       this.mkdir(conf.moduleName + '/static');
       this.mkdir(conf.moduleName + '/static/css');
-      this.mkdir(conf.moduleName + '/static/image');
+      this.mkdir(conf.moduleName + '/static/images');
       this.mkdir(conf.moduleName + '/static/js');
       this.mkdir(conf.moduleName + '/widget');
 

@@ -89,6 +89,7 @@ module.exports = yeoman.generators.Base.extend({
       var widgetConf = this.widgetConf;
       var widgetName = widgetConf.widgetName;
       this.mkdir('widget/' + widgetName);
+      this.mkdir('widget/' + widgetName + '/images');
 
       this.copy('widget.html', 'widget/' + widgetName + '/' + widgetName + '.html');
       this.copy('widget.css', 'widget/' + widgetName + '/' + widgetName + '.css');
