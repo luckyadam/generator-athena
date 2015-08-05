@@ -90,6 +90,8 @@ yo athena:widget [widgetName]
 
 ## 使用及编译
 
+### 模块化
+
 通过阅读设计稿，我们可以将页面拆分成不同``widget``，而一些可以通用的``widget``我们可以放到一个公共模块中去统一管理，通过这样的页面组件化方式，我们可以很好地避开复制代码的问题，同时让我们的代码更好管理。
 
 在执行``yo athena:page [pageName]``命令生成页面后，可以发现在模块的``page``目录下多了一个以刚刚输入的页面名称``pageName``作为名字的目录，这个目录下面包含 **html/js/css** 三个文件。在``html``文件中一般通过加载各个``widget``的方式来进行开发，具体代码如下：
@@ -104,6 +106,39 @@ yo athena:widget [widgetName]
 <%= widegt.load('user', null, 'gb') %>
 ```
 ``widget.load``可以方法接收三个参数，第一个参数是``widget``的名称，后面两个参数是可选参数，第二个是向``widget``传递的一些参数，第三个是``widget``所属的模块，如果是本模块，可以不传。
+
+### module-conf
+
+在生成的文件中**module-conf**文件是一个通过传入配置项生成的关于本模块的配置文件，我们可以看到它包含如下配置：
+
+```javascript
+
+'use strict';
+
+module.exports = {
+  app: 'qwd', // 项目名称
+  module: 'frs', // 模块名称
+  common: 'gb', // 本项目的公共模块
+  deploy: {  // 需要发布时的配置
+    qiang: {
+      host: 'labs.qiang.it', // 机器host
+      user: '', // 用户名
+      pass: '', // 密码
+      port: 21, // 端口
+      remotePath: '/labs.qiang.it/h5/qwd/frs' // 上传到的目录
+    },
+    jdTest: {
+      host: '192.168.193.32',
+      user: '',
+      pass: '',
+      port: 22,
+      remotePath: '/export/paipai/resource/static/fd/h5/qwd/frs'
+    }
+  }
+};
+
+```
+其中**app**、**module**、**common**这三个配置项**不要**修改，我们需要重点关注**deploy**这个配置项，这是发布到一些机器上的配置，可以注意到用户名和密码是空的，我们需要自己去完善它，同时上传的目录可以根据自己的需要进行修改。
 
 ### gulp
 
@@ -133,6 +168,11 @@ gulp deploy --remote [机器代号]
 gulp deploy --verbose
 ```
 
+当然聪明如你肯定知道两个参数是可以一起传的
+
+```
+gulp deploy --verbose --remote [机器代号]
+```
 
 
 
