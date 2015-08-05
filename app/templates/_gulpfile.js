@@ -102,7 +102,7 @@ gulp.task('deploy', ['build'], function () {
       port: qiang.port,
       remotePath: qiang.remotePath
     })))
-    .pipe($.if(argv.remote === 'jdtest', $.ftp({
+    .pipe($.if(argv.remote === 'jdtest', $.sftp({
       host: jdTest.host,
       user: jdTest.user,
       pass: jdTest.pass,

@@ -113,8 +113,26 @@ yo athena:widget [widgetName]
 
 通过``gulp serve``命令可以实时预览正在编辑的页面。
 
+可以通过携带参数来决定要浏览的页面：
+```
+gulp serve --page [页面名]
+```
+
 ### gulp deploy
 
 如果想要将生成好的页面发布到测试环境，可以通过``gulp deploy``来做，它会读取``module-conf.js``的配置来决定要发布到哪台机器的哪个目录下。
+
+通过传入参数来决定将要发布的目标机器：
+```
+gulp deploy --remote [机器代号]
+```
+**机器代号**目前可以是*qiang*和*jdtest*
+
+通过传入参数来观察文件传输情况：
+```
+gulp deploy --verbose
+```
+
+
 
 

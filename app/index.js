@@ -91,8 +91,6 @@ module.exports = yeoman.generators.Base.extend({
       this.mkdir(conf.moduleName + '/static/js');
       this.mkdir(conf.moduleName + '/widget');
 
-      this.log(this.conf);
-
       this.copy('_package.json', conf.moduleName + '/package.json');
       this.copy('_gulpfile.js', conf.moduleName + '/gulpfile.js');
       this.copy('_module-conf.js', conf.moduleName + '/module-conf.js');
