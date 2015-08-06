@@ -1,7 +1,7 @@
 {
-  "name": "<%= conf.moduleName %>",
+  "name": "<%= conf.appName %>",
   "version": "0.0.1",
-  "description": "",
+  "description": "development <%= conf.appName %>",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
