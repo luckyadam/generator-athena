@@ -3,5 +3,5 @@
 module.exports = {
   app: '<%= conf.appName %>',
   common: 'gb',
-  module: 'gb'
+  module: '<%= conf.moduleName %>'
 };

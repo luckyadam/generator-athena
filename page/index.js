@@ -34,8 +34,7 @@ module.exports = yeoman.generators.Base.extend({
     this.log('need help? go and open issue: https://github.com/luckyadam/generator-athena/issues/new');
     this.pageConf = {};
     this.pkg = require('../package.json');
-    var pwd = this.destinationPath();
-    this.moduleConf = require(pwd + '/module-conf');
+    this.moduleConf = require(this.destinationPath('module-conf'));
   },
 
   prompting: function () {
