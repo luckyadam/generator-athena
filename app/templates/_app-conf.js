@@ -18,6 +18,13 @@ module.exports = {
       pass: '',
       port: 22,
       remotePath: '/export/paipai/resource/static/fd/h5/<%= conf.appName %>'
+    },
+    tencent: {
+      host: '172.25.34.21',
+      user: '',
+      pass: '',
+      port: 21,
+      remotePath: '/newforward/static/fd/h5/<%= conf.appName %>'
     }
   }
 };

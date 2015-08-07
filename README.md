@@ -216,7 +216,7 @@ gulp serve --module [模块名] --page [页面名]
 ```
 gulp deploy --remote [机器代号]
 ```
-**机器代号**目前可以是*qiang*和*jdtest*
+**机器代号**目前可以是*qiang*、*jdtest*、*tencent*
 
 通过传入参数来观察文件传输情况：
 

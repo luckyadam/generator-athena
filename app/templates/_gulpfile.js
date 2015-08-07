@@ -189,6 +189,7 @@ gulp.task('deploy', ['temp'], function () {
   var deploy = appConf.deploy;
   var qiang = deploy.qiang;
   var jdTest = deploy.jdTest;
+  var tencent = deploy.tencent;
   var modules = appConf.moduleList;
   if (argv.module) {
     gulp.src(argv.module + '/dist/**', { base: argv.module + '/dist' })
@@ -198,6 +199,13 @@ gulp.task('deploy', ['temp'], function () {
         pass: qiang.pass,
         port: qiang.port,
         remotePath: qiang.remotePath + '/' + argv.module
+      })))
+      .pipe($.if(argv.remote === 'tencent', $.ftp({
+        host: tencent.host,
+        user: tencent.user,
+        pass: tencent.pass,
+        port: tencent.port,
+        remotePath: tencent.remotePath + '/' + argv.module
       })))
       .pipe($.if(argv.remote === 'jdtest', $.sftp({
         host: jdTest.host,
@@ -215,6 +223,13 @@ gulp.task('deploy', ['temp'], function () {
         pass: qiang.pass,
         port: qiang.port,
         remotePath: qiang.remotePath
+      })))
+      .pipe($.if(argv.remote === 'tencent', $.ftp({
+        host: tencent.host,
+        user: tencent.user,
+        pass: tencent.pass,
+        port: tencent.port,
+        remotePath: tencent.remotePath
       })))
       .pipe($.if(argv.remote === 'jdtest', $.sftp({
         host: jdTest.host,
