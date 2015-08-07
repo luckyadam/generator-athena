@@ -1,5 +1,7 @@
 # generator-athena
 
+[![npm version](https://badge.fury.io/js/generator-athena.svg)](http://badge.fury.io/js/generator-athena)
+
 > JDC构建项目生成工具，生成相应目录和代码，同时提供Gulp配置对项目进行编译
 
 ## 安装
