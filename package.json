@@ -1,6 +1,6 @@
 {
   "name": "generator-athena",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A module creator for JDC front-end development",
   "main": "index.js",
   "scripts": {
