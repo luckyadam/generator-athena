@@ -17,6 +17,7 @@
     "gulp-imagemin": "^2.3.0",
     "gulp-load-plugins": "^0.10.0",
     "gulp-postcss": "^5.1.10",
+    "gulp-rename": "^1.2.2",
     "gulp-sftp": "^0.1.4",
     "gulp-util": "^3.0.6",
     "imagemin-pngquant": "^4.1.2",
