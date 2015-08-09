@@ -93,6 +93,7 @@ module.exports = yeoman.generators.Base.extend({
       this.mkdir(conf.moduleName + '/widget');
 
       this.copy('_module-conf.js', conf.moduleName + '/module-conf.js');
+      this.copy('_gulpfile.js', conf.moduleName + '/gulpfile.js');
 
       var appConfPath = this.destinationPath('app-conf.js');
       var appConf = require(appConfPath);
