@@ -1,6 +1,7 @@
 # generator-athena
 
 [![npm version](https://badge.fury.io/js/generator-athena.svg)](http://badge.fury.io/js/generator-athena)
+[![Code Climate](https://codeclimate.com/repos/55c848896956805335011ece/badges/b5b7d3d2e7a5341f9a85/gpa.svg)](https://codeclimate.com/repos/55c848896956805335011ece/feed)
 
 > JDC构建项目生成工具，生成相应目录和代码，同时提供Gulp配置对项目进行编译
 
@@ -128,6 +129,10 @@ yo athena:widget [widgetName]
 <%= widegt.load('user', null, 'gb') %>
 ```
 ``widget.load``可以方法接收三个参数，第一个参数是``widget``的名称，后面两个参数是可选参数，第二个是向``widget``传递的一些参数，第三个是``widget``所属的模块，如果是本模块，可以不传。
+
+**注意**
+
+* ``<%= widget.load %>`` 语句末尾不要加分号
 
 ### app-conf.js
 
