@@ -235,5 +235,11 @@ gulp deploy --module [模块名]
 gulp deploy --verbose --remote [机器代号]
 ```
 
+### gulp clone
+
+进入到某一模块下，通过``gulp clone`` 命令可以复制另一个模块的**widget**到当前模块。
 
 
+```
+gulp clone --from [来源模块] --widget [widget名字]
+```
