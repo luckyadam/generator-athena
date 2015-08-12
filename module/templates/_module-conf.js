@@ -4,5 +4,6 @@ module.exports = {
   creator: '<%= conf.author %>',
   app: '<%= conf.appName %>',
   common: 'gb',
-  module: '<%= conf.moduleName %>'
+  module: '<%= conf.moduleName %>',
+  description: '<%= conf.moduleDescription %>'
 };

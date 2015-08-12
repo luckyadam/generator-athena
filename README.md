@@ -1,7 +1,7 @@
 # generator-athena
 
 [![npm version](https://badge.fury.io/js/generator-athena.svg)](http://badge.fury.io/js/generator-athena)
-[![Code Climate](https://codeclimate.com/repos/55c848896956805335011ece/badges/b5b7d3d2e7a5341f9a85/gpa.svg)](https://codeclimate.com/repos/55c848896956805335011ece/feed)
+[![Code Climate](https://codeclimate.com/github/luckyadam/generator-athena/badges/gpa.svg)](https://codeclimate.com/github/luckyadam/generator-athena)
 
 > JDC构建项目生成工具，生成相应目录和代码，同时提供Gulp配置对项目进行编译
 
@@ -26,16 +26,11 @@
 一个项目对应一个目录，项目中可以包含多个模块，项目将由以下结构组成
 
 
-    ├── module1                 - 模块1
-    │   
+    ├── module1                 - 模块1 
     ├── module2                 - 模块2
-    │  
     ├── module3                 - 模块3
-    │
     ├── gulpfile.js             - gulp文件
-    │
     ├── app-conf.js             - 项目的配置信息
-    │
     └── package.json
 
 项目中模块将由以下结构组成

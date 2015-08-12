@@ -16,19 +16,11 @@
   <!--#include virtual="/sinclude/cssi/fd/h5/<%= pageConf.appName %>/<%= pageConf.modName %>/<%= pageConf.pageName %>.shtml" -->
   <!-- E 引用前端页面片 -->
 
-  <!-- S 开发请删除 -->
-    <!-- 生成combo样式链接
-    <link rel="stylesheet" href="http://<%= pageConf.secondaryDomain %>.paipaiimg.com/fd/h5/<%= pageConf.appName %>/gb/css/gb.css"/>
-    <link rel="stylesheet" href="http://<%= pageConf.secondaryDomain %>.paipaiimg.com/fd/h5/<%= pageConf.appName %>/<%= pageConf.modName %>/css/<%= pageConf.pageName %>.css">
-    生成combo样式链接 -->
-    <!-- <link rel="stylesheet" href="http://<%= pageConf.secondaryDomain %>.paipaiimg.com/fd/h5/<%= pageConf.appName %>/gb/css/gb.min.css"/> -->
-    <!-- global:css -->
-    <link rel="stylesheet" href="../<%= pageConf.commonModule %>/dist/css/<%= pageConf.commonModule %>.css"/>
-    <!-- endglobal -->
+  <link rel="stylesheet" type="text/css" href="../<%= pageConf.commonModule %>/css/<%= pageConf.commonModule %>.css" combo-use="/<%= pageConf.commonModule %>/css/<%= pageConf.commonModule %>.min.css" />
+  <!-- endglobal -->
 
-    <!-- combo:css <%= pageConf.pageName %> -->
-    <!-- endcombo -->
-  <!-- E 开发请删除 -->
+  <!-- combo:css <%= pageConf.pageName %> -->
+  <!-- endcombo -->
 </head>
 <!-- 注：加ontouchstart使css：active生效 -->
 <body>

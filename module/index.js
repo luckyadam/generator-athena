@@ -65,6 +65,12 @@ module.exports = yeoman.generators.Base.extend({
     }
     prompts.push({
       type: 'input',
+      name: 'moduleDescription',
+      message: '这个模块是干什么的呢？',
+      store: false
+    });
+    prompts.push({
+      type: 'input',
       name: 'author',
       message: '雁过留声，人过留名~~',
       default: this.user.git.name() || process.env.USER,
@@ -76,6 +82,7 @@ module.exports = yeoman.generators.Base.extend({
       this.conf = anwsers;
       this.conf.appName = appConf.app;
       this.conf.moduleName = this.conf.moduleName || this.moduleName;
+      this.conf.moduleDescription = this.conf.moduleDescription || '';
 
       done();
     }.bind(this));

@@ -17,14 +17,20 @@ module.exports = {
       user: '',
       pass: '',
       port: 22,
-      remotePath: '/export/paipai/resource/static/fd/h5/<%= conf.appName %>'
+      fdPath: '/fd/h5',
+      domain: 's.paipaiimg.com',
+      remotePath: '/export/paipai/resource/static/fd/h5/<%= conf.appName %>',
+      cssi: '/export/paipai/resource/sinclude/cssi/fd/h5/<%= conf.appName %>'
     },
     tencent: {
       host: '172.25.34.21',
       user: '',
       pass: '',
       port: 21,
-      remotePath: '/newforward/static/fd/h5/<%= conf.appName %>'
+      fdPath: '/fd/h5',
+      domain: 'static.paipaiimg.com',
+      remotePath: '/newforward/static/fd/h5/<%= conf.appName %>',
+      cssi: '/newforward/static/sinclude/cssi/fd/h5/<%= conf.appName %>'
     }
   }
 };
