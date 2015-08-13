@@ -8,30 +8,25 @@ var minimist = require('minimist');
 var path = require('path');
 var appConf = require('./app-conf');
 var spawn = require('child_process').spawn;
+var inquirer = require('inquirer');
 
 // 引入各个项目的gulpfile
-$.hub('*/gulpfile.js');
+var argv = minimist(process.argv.slice(2));
+if (typeof argv.module === 'string') {
+  var moduleList = argv.module.split(',');
+  var hubs = [];
+  moduleList.forEach(function (item) {
+    hubs.push(item + '/gulpfile.js');
+  });
+  console.log(hubs);
+  $.hub(hubs);
+} else {
+  $.hub('*/gulpfile.js');
+}
 
 gulp.task('deploy', ['temp'], function () {
-  var knownOptions = {
-    string: 'remote',
-    default: { remote: 'qiang' }
-  };
-  var argv = minimist(process.argv.slice(2), knownOptions);
   var deploy = appConf.deploy;
-  var deployOptions = deploy[argv.remote];
-  if (!deployOptions) {
-    $.util.log($.util.colors.red('机器名错误，目前支持publish到 jdTest 和 tencent 这两台机器！'));
-    cb();
-  }
-  var gulpSSH = new $.ssh({
-    sshConfig: {
-      host: deployOptions.host,
-      port: deployOptions.port,
-      username: deployOptions.user,
-      password: deployOptions.pass
-    }
-  });
+  var deployOptions = deploy['qiang'];
   var deployParams = {
     host: deployOptions.host,
     user: deployOptions.user,
@@ -40,9 +35,7 @@ gulp.task('deploy', ['temp'], function () {
     remotePath: deployOptions.remotePath
   };
   gulp.src('.temp/**')
-    .pipe($.if(argv.remote === 'qiang', $.ftp(deployParams)))
-    .pipe($.if(argv.remote === 'tencent', $.ftp(deployParams)))
-    .pipe($.if(argv.remote === 'jdtest', gulpSSH.dest(deployOptions.remotePath)))
+    .pipe($.ftp(deployParams))
     .pipe($.util.noop());
 });
 

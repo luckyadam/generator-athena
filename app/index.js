@@ -66,6 +66,7 @@ module.exports = yeoman.generators.Base.extend({
 
       this.copy('_gb.css', commonModule + '/static/css/base.css');
       this.copy('_module-conf.js', commonModule + '/module-conf.js');
+      this.copy('_module_gulp.js', commonModule + '/gulpfile.js');
 
       this.copy('_package.json', conf.appName + '/package.json');
       this.copy('_gulpfile.js', conf.appName + '/gulpfile.js');
