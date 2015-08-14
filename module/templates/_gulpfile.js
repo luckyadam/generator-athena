@@ -239,7 +239,7 @@ gulp.task('publish', ['temp'], function (cb) {
       answers.pages.forEach(function (item) {
         var name = path.basename(item, '.html');
         var dpath = originPath + '/dist/';
-        var cpath = originPath + '/combofile/';
+        var cpath = originPath + '/dist/combofile/';
         var htmlPath = dpath + item;
         var combofileHtmlPath = cpath + item;
         var combofileShtmlPath = cpath + name + '.shtml';
@@ -274,7 +274,7 @@ gulp.task('publish', ['temp'], function (cb) {
               fdPath: deployOptions.fdPath,
               domain: deployOptions.domain
             }))
-            .pipe(gulp.dest('combofile'))
+            .pipe(gulp.dest('dist/combofile'))
             .on('finish', function (err) {
               if (err) {
                 $.util.log(err);

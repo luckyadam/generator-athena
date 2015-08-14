@@ -36,13 +36,12 @@
 项目中模块将由以下结构组成
 
     ├── dist                    - 通过编译生成的目录
+    │   ├── combofile           - publish时用来存放生成页面和页面片文件的目录
     │   ├── css                 - 通过编译生成的css文件
     │   ├── js                  - 通过编译生成的js文件
     │   ├── image               - 通过编译压缩后的image文件
     │   ├── page1.html          - 通过编译生成的页面html
     |
-    ├── combofile               - publish时用来存放生成页面和页面片文件的目录
-    │
     ├── page                    - 所有页面目录
     │   ├── page                - 某一页面目录
     │       ├── page.css        - 页面级css
@@ -156,7 +155,24 @@ module.exports = {
       user: '',
       pass: '',
       port: 22,
-      remotePath: '/export/paipai/resource/static/fd/h5/qwd/frs'
+      fdPath: '/fd/h5',
+      domain: 's.paipaiimg.com',
+      remotePath: '/export/paipai/resource/static/fd/h5/hellokity',
+      cssi: '/export/paipai/resource/sinclude/cssi/fd/h5/hellokity', // 上传页面片的目录
+      assestPrefix: '/static/fd/h5/hellokity', // 发布完静态资源后，静态资源路径
+      shtmlPrefix: '/sinclude/cssi/fd/h5/hellokity' // 发布完页面片后，静态资源路径
+    },
+    tencent: {
+      host: '172.25.34.21',
+      user: '',
+      pass: '',
+      port: 21,
+      fdPath: '/fd/h5',
+      domain: 'static.paipaiimg.com',
+      remotePath: '/newforward/static/fd/h5/hellokity',
+      cssi: '/newforward/static/sinclude/cssi/fd/h5/hellokity',
+      assestPrefix: '/static/fd/h5/hellokity',
+      shtmlPrefix: '/static/sinclude/cssi/fd/h5/hellokity'
     }
   }
 };
