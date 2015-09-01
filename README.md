@@ -41,6 +41,7 @@
     │   ├── js                  - 通过编译生成的js文件
     │   ├── image               - 通过编译压缩后的image文件
     │   ├── page1.html          - 通过编译生成的页面html
+    │   ├── map.json            - 通过gulp编译后生成页面依赖widget列表
     |
     ├── page                    - 所有页面目录
     │   ├── page                - 某一页面目录
@@ -60,7 +61,7 @@
     │       ├── widget.js       - widget的js
     │       ├── widget.html     - widget的html
     │
-    ├── map.json                - 通过gulp编译后生成页面依赖widget列表
+    ├── static-conf.js          - 需要额外引用的静态资源的配置
     │
     └── module-conf.js          - 模块的配置信息
 
@@ -126,9 +127,38 @@ yo athena:widget [widgetName]
 ```
 ``widget.load``可以方法接收三个参数，第一个参数是``widget``的名称，后面两个参数是可选参数，第二个是向``widget``传递的一些参数，第三个是``widget``所属的模块，如果是本模块，可以不传。
 
+### 页面中API
+
+#### widget.load
+
+如前一小节所显示，用来加载组件
+
+#### getCSS
+
+使用方式 `<%= getCSS() %>`
+
+用来输出页面所需引用的**CSS Link**，可传入2个参数，第一个参数是`CSS` 样式表的名称，第二个参数是模块名。如果什么都不传则默认输出与当前页面同名的样式表。例如：
+
+当前模块`hello`中有一页面为`mine.html`，在页面`<head>`标签中调用`<%= getCSS() %>`将输出
+
+```
+<link rel="stylesheet" type="text/css" href="css/mine.css" combo-use="/hello/css/mine.min.css">
+```
+
+#### getJS
+
+与上述`getCSS`相似，将输出页面所需引用的脚本文件，参数与`getCSS`保持一致。
+
+当前模块`hello`中有一页面为`mine.html`，在页面`<body>`标签最后调用`<%= getJS() %>`将输出
+
+```
+<script src="js/hello.js"></script>
+```
+
+
 **注意**
 
-* ``<%= widget.load %>`` 语句末尾不要加分号
+* 这些API调用语句末尾不要加分号
 
 ### app-conf.js
 
@@ -180,27 +210,109 @@ module.exports = {
 ```
 其中 **app**、**common** 配置项 **不要** 修改，我们需要重点关注 **deploy** 这个配置项，这是发布到一些机器上的配置，可以注意到用户名和密码是空的，我们需要自己去完善它，同时上传的目录可以根据自己的需要进行修改。
 
+### module-conf.js
+
+包含模块的一些配置信息
+
+```javascript
+
+'use strict';
+
+module.exports = {
+  creator: 'luckyadam',  // 模块创建者
+  app: 'hw',  // 项目名称
+  common: 'gb',  // 公共模块名称
+  module: 'mm',  // 当前模块名
+  description: 'test',  // 模块简要信息
+  support : {  
+    px2rem: {  // px转rem配置
+      enable: false,  // 是否开启
+      root_value: 40,
+      unit_precision: 5,
+      prop_white_list: [],
+      selector_black_list: [],
+      replace: true,
+      media_query: false
+    },
+  }
+};
+```
+
+### static-conf.js
+
+需要引用`static`目录下资源的配置，由使用者自定义，一般可以用来自定义配置一些需要额外引用的第三方库文件，例如：
+
+在`static/css`目录下存在`t1.css`，`t2.css`两个资源，需要将这两个资源引用到页面中，那么可以在该文件中增加如下配置
+
+```javascript
+
+'use strict';
+
+module.exports = {
+  staticPath: {
+    'test.css': [
+      'static/css/t1.css',
+      'static/css/t2.css'
+    ]
+  }
+};
+
+```
+
+`test.css` 是自定义的合并后css名称，若要在页面中引用，只需调用 `<%= getCSS('test.css') %>` 即可。引用js文件同理
+
+需要注意的是：
+
+* `test.css` 需带上后缀以示区分
+* 引用的资源路径，从static目录开始写全，如 `static/css/t1.css`
+
 ### map.json
 
-**map.json** 文件是通过执行gulp任务后生成一个标识依赖关系的文件，文件中包含了当前模块所有页面所依赖的**widget**组件的信息，它的文件结构如下
+**map.json** 文件是通过执行gulp任务后生成一个标识依赖关系的文件，文件中包含了当前模块所有页面所依赖的**widget**组件的信息，同时还有页面引用静态资源的信息，它的文件结构如下
 
 ```javascript
 {
-  "find.html": [],
-  "index.html": [],
-  "open.html": [],
-  "open1.html": [],
-  "open3.html": [],
-  "shop.html": [
-    {
-      "widgetName": "topbar",
-      "param": {
-        "topbar": "微信"
-      },
-      "module": "test",
-      "exists": true
+  "dependency": {
+  	"find.html": [],
+ 	"index.html": [],
+ 	"open.html": [],
+ 	"open1.html": [],
+  	"open3.html": [],
+  	"shop.html": [
+   	 {
+      	"widgetName": "topbar",
+      	"param": {
+        	"topbar": "微信"
+      	},
+      	"module": "test",
+      	"exists": true
+     }
+   ],
+   
+   "include": {
+    "test.html": {
+      "css": [
+        {
+          "name": "gb.css",
+          "module": "gb"
+        },
+        {
+          "name": "test.css",
+          "module": "mm"
+        },
+        {
+          "name": "t.css",
+          "module": "mm"
+        }
+      ],
+      "js": [
+        {
+          "name": "test.js",
+          "module": "mm"
+        }
+      ]
     }
-  ]
+  }
 }
 
 ```
